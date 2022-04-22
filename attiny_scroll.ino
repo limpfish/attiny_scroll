@@ -41,12 +41,12 @@ void loop()
   OzOled.sendBiggerCharData(message[messagei],fontcolumn); // top half
   OzOled.setCursorXYPixel(126,1);
   OzOled.sendBiggerCharData(message[messagei],fontcolumn+12); // lower half
-  fontcolumn++; fontcolumn%=12; // column
 
-  if (fontcolumn==0)   // increment character index?
-  {
-    messagei++;
-    messagei%=message.length(); // roll over
+  if (++fontcolumn == 12) { // increment character index?
+    fontcolumn = 0;
+    if (++messagei == message.length()) { // roll over
+      messagei = 0;
+    }
   }
 
   
