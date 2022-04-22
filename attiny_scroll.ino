@@ -32,15 +32,14 @@ void loop()
 {
 
   // Setup scroll...
-  OzOled.setDeactivateScroll(); 
-  OzOled.setCursorXYPixel(0,0);
-  OzOled.sendData(0); // blank first column for wrap
-  OzOled.setCursorXYPixel(0,1);
-  OzOled.sendData(0); // blank first column for wrap
-  OzOled.setCursorXYPixel(126,0);
-  OzOled.sendBiggerCharData(message[messagei],fontcolumn); // top half
-  OzOled.setCursorXYPixel(126,1);
-  OzOled.sendBiggerCharData(message[messagei],fontcolumn+12); // lower half
+  OzOled.setDeactivateScroll();
+  OzOled.scrollLeftPixel(0, 1, 8); // Perform hardware scroll
+  OzOled.setDeactivateScroll();  // End... moved 1 pixel?
+
+  OzOled.setCursorXYPixel(127, 0);
+  OzOled.sendBiggerCharData(message[messagei], fontcolumn); // top half
+  OzOled.setCursorXYPixel(127, 1);
+  OzOled.sendBiggerCharData(message[messagei], fontcolumn + 12); // lower half
 
   if (++fontcolumn == 12) { // increment character index?
     fontcolumn = 0;
@@ -49,11 +48,7 @@ void loop()
     }
   }
 
-  
-  OzOled.scrollLeftPixel(0,1,8); // Perform hardware scroll
-  OzOled.setDeactivateScroll();  // End... moved 1 pixel?
-  
-  delay(10); 
+  delay(10);
 
   //perform other functions while scrolling stopped
 
